@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="custome-container">
+    <div class="custome-container posted-blog">
       <h1>AMD unveils its 2nd-gen Epyc CPUs, "the world's fastest x86 processors</h1>
       <div class="description mb-3 grey--text darken-1">
           <span>By <b><nuxt-link to="/">Rob Thubron</nuxt-link></b> </span><span> on August 8, 2019, 3:27 AM</span>
@@ -52,77 +52,5 @@ export default {
 .custome-container {
   max-width: 900px;
   margin: 5px auto;
-}
-
-p {
-    font-size: 1.2rem;
-    margin: 2rem 0;
-}
-h1 { font-size: 3rem; }
-h2 { font-size: 2.7rem; }
-h3 { font-size: 2.4rem; }
-h4 { font-size: 2rem; }
-h5 { font-size: 1.7rem; }
-h6 { font-size: 1.3rem; }
-
-h1, h2, h3, h4, h5, h6 {
-    position: relative;
-    text-transform: uppercase;
-    margin-top: 1rem;
-    padding-top: .5rem;
-}
-
-h1::after,
-h2::after,
-h3::after,
-h4::after,
-h5::after,
-h6::after {
-    position: absolute;
-    content: '';
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 0%;
-    border-bottom: 1px solid;
-}
-h1::after,
-h2::after,
-h3::after,
-h4::after,
-h5::after,
-h6::after,
-b {
-    animation: h1Animate 1s .8s 1 forwards linear; 
-}
-
-@keyframes h1Animate {
-    0% {
-        width: 0%;
-    } 100% {
-        width: 100%;
-    }
-}
-@media screen and (max-width: 600px) {
-    h1 {
-        font-size: 1.6rem;
-    }
-}
-.custome-container img {
-    position: relative;
-    width: 100%;
-}
-.custome-container a {
-    color: rgb(0, 0, 0);
-    margin-bottom: 5px;
-    text-decoration: none;
-    border-bottom: 1px solid rgb(0, 0, 0);
-}
-b {
-    position: relative;
-}
-.custome-container a:hover {
-    color: rgb(85, 85, 85);
-    border-color: rgb(85, 85, 85);
 }
 </style>
