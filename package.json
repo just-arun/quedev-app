@@ -4,6 +4,7 @@
   "description": "QueDEV blog project",
   "author": "arun",
   "private": true,
+  "homepage": "https://github.com/just-arun/quedev-app",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",

@@ -1,57 +1,85 @@
 <template>
   <v-container>
-    <v-layout row wrap class="custome-container">
-      <v-flex xs12 sm6 md6 lg4 v-for="(item, i) in items" :key="i">
-        <v-card hover flat class="ma-2">
-          <v-img class="white--text black-gradient" max-height="200px" :src="item.image"></v-img>
+    <v-layout row class="custome-container-index" style="flex-wrap: wrap-reverse;">
+      <v-flex xs12 lg3 sticky>
+        <v-banner sticky class="mr-1" flat text>
+          <v-row class="pl-0">
+            <v-col v-for="(card, i) in titems" :key="i">
+            <nuxt-link to="/post/dfs">
+               <v-img
+               to="/post/sd"
+              :src="card.src"
+              class="white--text"
+              height="200px"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.7)"
+            >
+              <v-card-title
+                v-text="card.title"
+                style="width:200px; text-decoration: none;"
+                class="fill-height align-end"
+              ></v-card-title>
+            </v-img>
+            </nuxt-link>
+            </v-col>
+          </v-row>
+        </v-banner>
+      </v-flex>
+      <v-flex xs12 lg9>
+        <v-layout row wrap>
+          <v-flex xs12 sm6 md6 lg4 v-for="(item, i) in items" :key="i">
+            <v-card hover flat class="ma-2">
+              <v-img class="white--text black-gradient" max-height="200px" :src="item.image"></v-img>
 
-          <v-card-text class="pb-0">
-            <v-card-title class="text--primary ml-0 pl-0 my-0 py-0">Top 10 Australian beaches</v-card-title>
-          </v-card-text>
-          <v-card-text class="my-0 py-0">
-            <v-layout row wrap align-center>
-              <span class="ml-3">{{item.views}} views</span>
-              <v-spacer></v-spacer>
-              <v-btn
-                @click="item.isLike = !item.isLike"
-                icon
-                small
-                text
-                :class="{ 'red--text': item.isLike }"
-              >
-                <v-icon>{{ item.isLike ? 'mdi-heart' : 'mdi-heart-outline'}}</v-icon>
-              </v-btn>
-              <v-btn icon small text>
-                <v-icon small>mdi-share-variant</v-icon>
-              </v-btn>
-              <v-btn @click="item.bookmark = !item.bookmark" :class="{ 'blue--text': item.bookmark }" icon small text><v-icon>{{ item.bookmark ? 'mdi-bookmark-check' : 'mdi-bookmark' }}</v-icon></v-btn>
-            </v-layout>
-          </v-card-text>
-          <v-expand-transition>
-            <div v-show="item.show">
-              <v-card-text>{{item.desctiption}}...</v-card-text>
-            </div>
-          </v-expand-transition>
-          <v-card-actions>
-            <v-btn text color="purple">Read more</v-btn>
-
-            <v-spacer></v-spacer>
-
-            <v-btn icon small @click="item.show = !item.show">
-              <v-icon>{{ item.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-            </v-btn>
-          </v-card-actions>
-
-        </v-card>
+              <v-card-text class="pb-0">
+                <v-card-title class="text--primary ml-0 pl-0 my-0 py-0">Top 10 Australian beaches</v-card-title>
+              </v-card-text>
+              <v-card-text class="my-0 py-0">
+                <v-layout row wrap align-center>
+                  <span class="ml-3">{{item.views}} views</span>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    @click="item.isLike = !item.isLike"
+                    icon
+                    small
+                    text
+                    :class="{ 'red--text': item.isLike }"
+                  >
+                    <v-icon>{{ item.isLike ? 'mdi-heart' : 'mdi-heart-outline'}}</v-icon>
+                  </v-btn>
+                  <v-btn icon small text>
+                    <v-icon small>mdi-share-variant</v-icon>
+                  </v-btn>
+                  <v-btn
+                    @click="item.bookmark = !item.bookmark"
+                    :class="{ 'blue--text': item.bookmark }"
+                    icon
+                    small
+                    text
+                  >
+                    <v-icon>{{ item.bookmark ? 'mdi-bookmark-check' : 'mdi-bookmark' }}</v-icon>
+                  </v-btn>
+                </v-layout>
+              </v-card-text>
+              <v-expand-transition>
+                <div v-show="item.show">
+                  <v-card-text>{{item.desctiption}}...</v-card-text>
+                </div>
+              </v-expand-transition>
+              <v-card-actions>
+                <v-btn to="/post/sd" text color="purple">Read more</v-btn>
+                <v-spacer></v-spacer>
+                <v-btn icon small @click="item.show = !item.show">
+                  <v-icon>{{ item.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
     <div class="text-center">
-    <v-pagination
-      v-model="page"
-      :length="6"
-      class="my-5"
-    ></v-pagination>
-  </div>
+      <v-pagination v-model="page" :length="6" class="my-5"></v-pagination>
+    </div>
   </v-container>
 </template>
 
@@ -80,6 +108,12 @@ export default {
       img8,
       img9,
       img10,
+
+      titems: [
+        { title: 'This is bullshit and deep shit', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12 },
+        { title: 'This is lame ass and damn ass', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 12 },
+        { title: 'This is Hollyshit and Poop', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 12 },
+      ],
       items: [
         {
           title: "item",
@@ -202,10 +236,11 @@ export default {
 };
 </script>
 <style>
-.custome-container {
+.custome-container-index {
   margin: 5px auto;
-  max-width: 900px;
+  max-width: 1600px;
 }
+
 .black-gradient {
   position: relative;
 }
@@ -226,5 +261,12 @@ export default {
   height: 100%;
   width: 100%;
   background-image: linear-gradient(to top right, black rgba(255, 255, 255, 0));
+}
+.cus-align {
+  text-align: left;
+  height: 100%;
+  position: absolute;
+  width: 200px;
+  top: 60%;
 }
 </style>

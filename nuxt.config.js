@@ -55,20 +55,20 @@ export default {
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
-    customVariables: ["~/assets/variables.scss"]
+    customVariables: ["~/assets/variables.scss"],
     // theme: {
-    //   dark: true,
-    //   themes: {
-    //     dark: {
-    //       primary: colors.blue.darken2,
-    //       accent: colors.grey.darken3,
-    //       secondary: colors.amber.darken3,
-    //       info: colors.teal.lighten1,
-    //       warning: colors.amber.base,
-    //       error: colors.deepOrange.accent4,
-    //       success: colors.green.accent3
-    //     }
-    //   }
+      // dark: true,
+      // themes: {
+      //   dark: {
+      //     primary: colors.blue.darken2,
+      //     accent: colors.grey.darken3,
+      //     secondary: colors.amber.darken3,
+      //     info: colors.teal.lighten1,
+      //     warning: colors.amber.base,
+      //     error: colors.deepOrange.accent4,
+      //     success: colors.green.accent3
+      //   }
+      // }
     // }
   },
   /*
@@ -85,8 +85,26 @@ export default {
   },
 
   workbox: {
-    offline: true,
+    dev: true,
     offlineAnalytics: true,
-    importScripts: ["custom-sw.js"]
+    preCaching: [
+      '/',
+      '/create/',
+      '/trending/',
+    ],
+    autoRegister: true,
+    runtimeCaching: [
+      '/',
+      '/create/',
+      '/trending/',
+      '/catagories/',
+      '/post/',
+      'https://cdn.jsdelivr.net/npm/workbox-cdn@4.3.1/workbox/workbox-sw.js'
+    ],
+    globDirectory: "dist",
+    globPatterns: [
+      "**/*/{css,html,js}"
+    ],
+
   }
 };

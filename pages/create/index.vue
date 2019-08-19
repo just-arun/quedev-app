@@ -4,33 +4,6 @@
     <v-flex xs12>
       <v-text-field class="mx-2" v-model="title" label="title" filled></v-text-field>
     </v-flex>
-    <v-flex xs12>
-      <v-textarea class="mx-2" filled name="input-7-4" label="Description For Your Post"></v-textarea>
-    </v-flex>
-    <v-flex xs12>
-      <v-combobox
-        class="mx-2"
-        v-model="keyWords"
-        :items="items"
-        chips
-        clearable
-        label="Key Words for Your Post"
-        multiple
-        filled
-      >
-        <template v-slot:selection="{ attrs, item, select, selected }">
-          <v-chip
-            v-bind="attrs"
-            :input-value="selected"
-            close
-            @click="select"
-            @click:close="remove(item)"
-          >
-            <strong>{{ item }}</strong>
-          </v-chip>
-        </template>
-      </v-combobox>
-    </v-flex>
     <v-flex xs12 background-color="#ebebeb">
       <v-layout class="mx-2" background-color="#ebebeb" row wrap justify-center>
         <!-- <span> -->

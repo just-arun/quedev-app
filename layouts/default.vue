@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :dark="darkThem">
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -26,32 +26,6 @@
         <span class="grey--text font-weight-bold">DEV</span>
       </nuxt-link>
       <v-spacer />
-      <v-btn @click="searchTriger = true" text small icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-      <!-- <v-btn text small icon><v-icon>mdi-dots-vertical</v-icon></v-btn> -->
-      <v-menu bottom left>
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item
-            v-for="(item, i) in quickSettings"
-            :key="i"
-            @click="shareFunction(item.title)"
-          >
-            <v-list-tile-action>
-              <v-icon left>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-tile-content>
-          </v-list-item>
-        </v-list>
-      </v-menu>
       <v-btn
         class="hidden-sm-and-down"
         small
@@ -61,18 +35,55 @@
         v-for="(item, i) in items"
         :key="i"
       >{{item.title}}</v-btn>
+      <v-btn @click="searchTriger = true" text small icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+      <!-- <v-btn text small icon><v-icon>mdi-dots-vertical</v-icon></v-btn> -->
+      <v-menu bottom right transition="slide-y-transition">
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <div
+          v-ripple
+            v-for="(item, i) in quickSettings"
+            :key="i">
+          <v-list-item v-if="!item.to">
+            <!-- <v-icon left>{{ item.icon }}</v-icon> -->
+            <v-list-item-title class="px-2"
+            @click="shareFunction(item.title)">
+              <v-icon class="pr-2">{{ item.icon }}</v-icon>
+              <span>{{ item.title }}</span>
+            </v-list-item-title>
+          </v-list-item>
+
+          <!-- with link -->
+
+          <v-list-item v-if="item.to" :to="item.to">
+            <v-list-item-title class="px-2"
+            @click="shareFunction(item.title)">
+              <v-icon class="pr-2">{{ item.icon }}</v-icon>
+              <span>{{ item.title }}</span>
+            </v-list-item-title>
+          </v-list-item>
+          </div>
+
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <!-- <v-footer
+    <v-footer
       :fixed="fixed"
-      app
     >
       <span>&copy; 2019</span>
-    </v-footer>-->
+    </v-footer>
     <Search
       v-if="searchTriger"
       v-bind:searchTriger="searchTriger"
@@ -89,15 +100,16 @@ export default {
   },
   data() {
     return {
+      darkThem: true,
       searchTriger: false,
       clipped: false,
       drawer: false,
       fixed: false,
       quickSettings: [
-        { title: "Profile", icon: "mdi-account-circle" },
+        { to:'/user/login', title: "Profile", icon: "mdi-account-circle" },
         { title: "Alerts", icon: "mdi-bell" },
-        { title: "shre", icon: "mdi-share-variant" },
-        { title: "Logout", icon: "mdi-logout-variant" }
+        { title: "share", icon: "mdi-share-variant" },
+        { to:'/user/logout', title: "Logout", icon: "mdi-logout-variant" }
       ],
       items: [
         {
@@ -120,11 +132,6 @@ export default {
           title: "Create Post",
           to: "/create/"
         },
-        {
-          icon: "mdi-settings",
-          title: "settings",
-          to: "/settings"
-        }
       ],
       miniVariant: false,
       right: true,
@@ -133,30 +140,25 @@ export default {
     };
   },
   methods: {
-    shareFunction() {
-      // var text = 'Add text to share with the URL';
-      // if ('share' in navigator) {
-      //     navigator.share({
-      //         title: document.title,
-      //         text: text,
-      //         url: location.href,
-      //     })
-      // } else {
-      //     // Here we use the WhatsApp API as fallback; remember to encode your text for URI
-      //     location.href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text + ' - ') + location.href
-      // }
-      if (navigator.share) {
-        navigator
-          .share({
-            title: "Web Fundamentals",
-            text: "Check out Web Fundamentals — it rocks!",
-            url: "https://developers.google.com/web"
-          })
-          .then(() => console.log("Successful share"))
-          .catch(error => console.log("Error sharing", error));
+    shareFunction(para) {
+      if (para == "share") {
+        if (navigator.share) {
+          console.log("Successful share");
+          navigator
+            .share({
+              title: "Web Fundamentals",
+              text: "Check out Web Fundamentals — it rocks!",
+              url: `${window.location.host}/${window.location.pathname}`
+            })
+            .then(() => {
+              console.log(window.location.pathname);
+            })
+            .catch(error => console.log("Error sharing", error));
+        }
       }
     }
-  }
+  },
+  created() {}
 };
 </script>
 

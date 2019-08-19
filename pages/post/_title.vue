@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="custome-container posted-blog">
+    <div class="posted-blog custome-container" style="max-width:800px">
       <h1>AMD unveils its 2nd-gen Epyc CPUs, "the world's fastest x86 processors</h1>
       <div class="description mb-3 grey--text darken-1">
           <span>By <b><nuxt-link to="/">Rob Thubron</nuxt-link></b> </span><span> on August 8, 2019, 3:27 AM</span>
@@ -20,7 +20,6 @@
         src="https://static.techspot.com/images2/news/bigimage/2019/08/2019-08-08-image-5.jpg"
         alt
       />
-
       <p>We’ve heard plenty about Ryzen 3000’s support of PCIe 4.0, which brings twice the bandwidth of gen 3.0. Epyc 7xx2 is the first PCIe 4.0-ready x86 server processor, offering 128 lanes and a peak PCIe bandwidth of 512GB/s.</p>
       <img
         src="https://static.techspot.com/images2/news/bigimage/2019/08/2019-08-08-image-3.jpg"
