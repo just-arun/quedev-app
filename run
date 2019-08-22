@@ -6,7 +6,7 @@ if [ "$option" == "P" ]; then
 	read -p "enter your comment: " comm
 	git add .
 	git commit -m "$comm"
-	git push origin branch
+	git push origin master
 fi
 
 
