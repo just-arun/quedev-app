@@ -27,7 +27,7 @@
       <v-flex xs12 lg9>
         <v-layout row wrap>
           <v-flex xs12 sm6 md6 lg4 v-for="(item, i) in items" :key="i">
-            <v-card hover flat class="ma-2">
+            <v-card flat class="ma-2">
               <v-img class="white--text black-gradient" max-height="200px" :src="item.image"></v-img>
 
               <v-card-text class="pb-0">

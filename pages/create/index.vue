@@ -37,7 +37,7 @@
     <v-flex xs12 v-if="preview">
       <div class="preview-body posted-blog">
         <h1>{{title}}</h1>
-        {{ dateNow }}
+        {{ dateNow.toUTCString() }}
         <div style="min-height:500px" v-html="$md.render(postBody)"></div>
       </div>
     </v-flex>
@@ -158,7 +158,7 @@ export default {
       }
       if (fWhich == "T") {
         utilBlockFunc(
-          "|     title-1    |     title-2    | \n| --------------- | ---------------- |\n| content-1 | content-2 |"
+          "|\ttitle-1\t|     title-2    | \n| --------------- | ---------------- |\n| content-1 | content-2 |"
         );
       }
       if (fWhich == "UL") {
@@ -184,6 +184,11 @@ export default {
 <style>
 .custome-container {
   margin: 5px auto;
-  max-width: 900px;
+  max-width: 800px;
+}
+@media screen and (max-width: 900px) {
+  .custome-container {
+    max-width: 512px;
+  }
 }
 </style>
